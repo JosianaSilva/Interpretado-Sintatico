@@ -1,21 +1,21 @@
-import re
+#import re
 from scanner import analisadorLexico, analiseTexto
 from parser_ import testeRegras
 
 print(analisadorLexico("var1"))
 print(analisadorLexico("1.5"))
-print(analisadorLexico("se"))
+print(analisadorLexico("if"))
 print(analisadorLexico("="))
 
 try:
-    print(analisadorLexico("&Var"))
+  print(analisadorLexico("&Var"))
 except NameError:
-    print("Nome inválido")
+  print("Nome inválido")
 
 try:
-    print(analisadorLexico("1var"))
+  print(analisadorLexico("1var"))
 except NameError:
-    print("Nome inválido")
+  print("Nome inválido")
 
 print()
 
@@ -37,15 +37,25 @@ txt2 = "double a = 20;"
 txt3 = """for (int var = 100; var >= 10; var--) {
     a = ;
     }"""
-txt4 = """for (int var = 100; var >= 10; var--){\n}""" 
-# este txt4 é pra gerar um Erro, pois não tem instruções entre { e }
+txt4 = """for (int var = 100; var >= 10; var--){\n}"""
 txt5 = """if (a == b) {
     printf("%s",a);
     }"""
 txt6 = """printf("%d", num);"""
+txt7 = """for (int var = 100; var >= 10; var--) {
+    for(int var2 = 0; var2 < 10; var++){
+        printf("%d", var2);
+    }
+}"""
+txt8 = """    for(int var2 = 0; var2 < 10; var++){
+        printf("%d", var2);
+    } """
+txt9 = """if(a == b){
+    printf("%s", a);
+}"""
 
 try:
-    print(testeRegras(txt3))
+  print(testeRegras(txt7))
 except SyntaxError as error:
-    print("SyntaxError")
-    print(error.args[0])
+  print("SyntaxError")
+  print(error.args[0])

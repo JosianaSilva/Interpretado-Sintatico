@@ -10,7 +10,7 @@ simbolos = [
 ]
 
 sequenciasDeEscape = [ 
-  "%d", "%f", "%s", "%c", "%e", "%E", "%i"
+  "%d", "%f", "%s", "%c", "%e", "%E", "%i", "%u"
 ]
 
 
