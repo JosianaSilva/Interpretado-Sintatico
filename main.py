@@ -35,7 +35,7 @@ print()
 txt = "for (float var = 100; var >= 10; var++){ a = 2; }"
 txt2 = "double a = 20;"
 txt3 = """for (int var = 100; var >= 10; var--) {
-    a = 2;
+    a = ;
     }"""
 txt4 = """for (int var = 100; var >= 10; var--){\n}""" 
 # este txt4 é pra gerar um Erro, pois não tem instruções entre { e }
@@ -44,5 +44,8 @@ txt5 = """if (a == b) {
     }"""
 txt6 = """printf("%d", num);"""
 
-
-print(testeRegras(txt3))
+try:
+    print(testeRegras(txt3))
+except SyntaxError as error:
+    print("SyntaxError")
+    print(error.args[0])
