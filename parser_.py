@@ -2,11 +2,11 @@ import re
 
 regras = {
     "atribuicao::":
-    r"^(\s*?(int|float|double)\s*?\w+|\s*?\w+)\s?=\s?(\w+|\d+);\s*?\Z",
+    r"^(\s*?(int|float|double)\s*?[*]?\w+[*]?|\s*?\w+)\s?=\s?(\w+|\d+);\s*?\Z",
     "if::":
     r"^(if|\s*?if)\s*?[(]\s?.*\s*?[)]\s?[{]\s*?$\s*?.*\s*?$\s*?[}]\Z",
     "printf::":
-    r"^(printf|\s*?printf)[(]\s*?[\"]\s*?((%d|%f|%i|%s|%c|%e|%E)+\s*?\w*?\d*?[\"]\s*?,\s*?.+|\s*?\w*?\s*?[\"]|\s*?\d*\s*?[\"]|\s*?[a-zA-z_1-9]*?\s*?[\"])\s*?[)](;|;$)\Z",
+    r"^(printf|\s*?printf)[(]\s*?[\"]\s*?.*?((%d|%f|%i|%s|%c|%e|%E)*?\s*?.*?[\"]\s*?,?\s*?.+|\s*?\w*?\s*?[\"]|\s*?\d*\s*?[\"]|\s*?[a-zA-z_1-9]*?\s*?[\"])\s*?[)](;|;$)\Z",
     "prinf2::":
     r"^(printf|\s*?printf)[(]\s*?[\"]\s*?.*?\s*?[\"]\s*?[)](;|;$)",
     "for::":
@@ -14,9 +14,9 @@ regras = {
 }
 
 
-def testeRegras(texto: str) -> re.Match:
+def identificaRegra(texto: str) -> re.Match:
     """ O objetivo desta função é testar se a instrução/linha diz 
-      respeito a algumas das regras pre-definidas. """
+      respeito a algumas das regras avaliadas. """
     if (re.search(".*?(for|if).*?", texto) and len(texto) > 3):
         instrucoes, texto = removeInstrucoes(texto)
     else:
@@ -26,7 +26,7 @@ def testeRegras(texto: str) -> re.Match:
         resultado = re.search(r, texto, flags=re.MULTILINE)
         if resultado:
             if instrucoes:
-                testeRegras(instrucoes)
+                identificaRegra(instrucoes)
             return resultado, k
     raise SyntaxError("Sintaxe incorreta encontrada em: " + "\n" + texto)
 

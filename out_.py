@@ -17,9 +17,11 @@ t = """for(int var = 0; var < 10; var++){
         printf("%d ", var);
     }"""
 
-def executarCodigoC():
+
+def executarCodigoC(texto: str):
+    gerarCodigoC(texto)
     with open("teste.exe", "w") as arquivo:
         arquivo.write("")
-    import subprocess 
-    subprocess.call(["g++","teste.c", "-o", "teste.exe"])
+    import subprocess
+    subprocess.call(["g++", "teste.c", "-o", "teste.exe"])
     subprocess.call("./teste.exe")
